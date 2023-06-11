@@ -40,11 +40,25 @@ function App() {
           <h4>{ 글제목[2] }</h4>
           <p>{ 날짜[2] }</p>
         </div>
-      </div>        
-    
-    
+      </div>      
+      <Modal></Modal>
     </div>
   );
+}
+
+function Modal(){
+  return(
+  <div className='flex-con'>
+  <div className='modal-con'>
+    <div>
+    <h3>글제목</h3>
+    <p>날짜</p>
+    <p>상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용</p>
+    </div>
+  </div>
+  </div>
+
+  )
 }
 
 export default App;

@@ -24,6 +24,31 @@ span, h4{
 .btn{
   cursor: pointer;
 }
+.flex-con{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-con{
+  width: 70vw;
+
+  background-color: #ddd;
+  padding: 30px;
+  margin: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+}
+.modal-con > div{
+  width: 50%;
+  background-color: #ddd;
+  border-radius: 10px;
+  text-align: center;
+}
+.modal-con > h3, p{
+  text-align: center;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
