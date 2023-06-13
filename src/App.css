@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  position: relative;
 }
 div{
   box-sizing: border-box;
@@ -20,34 +21,34 @@ div{
 }
 span, h4{
   padding-right: 10px;
+  padding-left: 10px;
 }
 .btn{
   cursor: pointer;
 }
-.flex-con{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 .modal-con{
-  width: 70vw;
-
-  background-color: #ddd;
-  padding: 30px;
-  margin: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-}
-.modal-con > div{
+  position: absolute;
+  top: 100px;
+  background-color: rgba(0, 0, 0, 0.6);
   width: 50%;
-  background-color: #ddd;
+  z-index: 5;
+  border-radius: 10px;
+  padding: 20px;
   border-radius: 10px;
   text-align: center;
+
+  color: white;
 }
-.modal-con > h3, p{
-  text-align: center;
+.flex-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.close{
+  display: none;
+}
+.show{
+  display: block;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -55,7 +56,6 @@ span, h4{
     animation: App-logo-spin infinite 20s linear;
   }
 }
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
