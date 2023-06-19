@@ -7,24 +7,35 @@ div{
 }
 .black-nav{
   display: flex;
+  align-items: center;
   padding-left: 20px;
   background-color: black;
   width: 100%;
   color: white;
 }
-.list{
+.content-box{
   display: flex;
   text-align: left;
   padding-left: 20px;
   border-bottom: 1px solid black;
   align-items: center;
+  position: relative;
 }
 span, h4{
   padding-right: 10px;
   padding-left: 10px;
 }
+.cursor{
+  cursor: pointer;
+}
 .btn{
   cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+  border: none;
+  color: white;
+  background: black;
+  border-radius: 5px;
 }
 .modal-con{
   position: absolute;
@@ -36,7 +47,6 @@ span, h4{
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-
   color: white;
 }
 .flex-box{
@@ -44,38 +54,11 @@ span, h4{
   justify-content: center;
   align-items: center;
 }
-.close{
-  display: none;
+.right-btn{
+  position: absolute;
+  right: 30px;
 }
-.show{
-  display: block;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.title-input{
+  margin: 10px;
+  padding: 10px;
 }

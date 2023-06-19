@@ -5,44 +5,120 @@ import { useState } from 'react';
 
 function App() {
 
-  let post = '강남 우동 asdads맛집';
-  let mainLogo = 'Blog';
-  let [글제목, 제목수정] = useState(['남자 여름 옷 추천', '배고플 땐 햄버거', '하지만 난 우동이 좋아..']);
-  let [날짜, 바뀔날짜] = useState(['3월 25일', '3월 23일', '3월 29일']);
-  let [like, setLike] = useState(0);
-  let [modal, setModal] = useState(0);
+  let [modal, setModal] = useState(false)
+  let [modalIndex, setModalIndex] = useState(0)
+  let [addInput, setAddInput] = useState('')
+
+
+  let [content, setContent] = useState([
+    {
+      title: '다!래끼',
+      date: '3월23일',
+      like: 0,
+      content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+      Dolorem, quos atque ipsum distinctio 
+      harum,vitae modi deserunt unde laboriosam molestias totam optio accusantium aut voluptas corporis 
+      tempora vero blanditiis a.`,
+    },
+    {
+      title: '가!래끼',
+      date: '3월26일',
+      like: 0,
+      content: '상세내용~',
+    },
+    {
+      title: '나!래끼',
+      date: '3월21일',
+      like: 0,
+      content: '상세적내용~~나레낍부분',
+    }
+  ])
+
+  const modalOn = () => {
+    setModal(true)
+  }
+  const likeUp = (i) => {
+    let copyContent = [...content]
+    copyContent[i].like = copyContent[i].like + 1
+    setContent(copyContent)
+  }
+
+  const likeDown = (i) => {
+    let copyContent = [...content]
+    copyContent[i].like = copyContent[i].like - 1
+    setContent(copyContent)
+  }
+  const addInputValue = (e) => {
+    setAddInput(e.target.value)
+  }
+  const addInputBtn = () => {
+    let newContent = {
+      title: addInput,
+      date: '날짜가져와',
+      like: 0,
+    }
+    let copyContent = [...content]
+    copyContent.unshift(newContent)
+    setContent(copyContent)
+  }
+  const contentDelete = (i) => {
+    let copyContent = [...content]
+    copyContent.splice(i, 1)
+    setContent(copyContent)
+  }
+
 
   return (
-    <div className="App">
+    <div className="app">
       <div className="black-nav">
-        <h4>{ mainLogo }</h4>
-      </div>
-      <div className='list-container'>
-        <div className='list btn'>
-          <h4 onClick={()=>{setModal(modal+1)}}>{글제목[0]}</h4>
-          <p>{날짜[0]}</p>
-          <span className='btn' onClick={()=>{setLike(like + 1)}}>UP</span>
-          <span className='btn' onClick={()=>{setLike(like - 1)}}>DOWN</span>
-          <span>{like}</span>
-        </div>
+        <h1>리엑트 게시판 GOOD</h1>
       </div>
       {
-        modal%2 == 1 ? <Modal></Modal> : null
-      } 
+        content.map((contentEl, i) => {
+          return (
+            <div className="content-box" key={i}>
+              <h4 className='cursor' onClick={() => { modalOn(); setModalIndex(i) }}>{contentEl.title}</h4>
+              <p className=''>{contentEl.date}</p>
+              <span className=''>{contentEl.like}</span>
+              <button onClick={() => { likeUp(i) }} className='btn'>GOOD</button>
+              <button onClick={() => { likeDown(i) }} className='btn'>BAD</button>
+              <button onClick={() => { contentDelete(i) }} className='btn right-btn'>삭제</button>
+            </div>
+          )
+        })
+      }
+      <div className="add-input-box flex-box">
+        <input className='title-input' type="text" onChange={(e) => { addInputValue(e) }} />
+        <input className='btn' type="button" value="글 추가" onClick={() => { addInputBtn() }} />
+      </div>
+      {
+        modal == true ? <Modal
+          content={content}
+          setModal={setModal}
+          i={modalIndex}
+        /> : null
+      }
     </div>
-  );
+
+
+
+  )
+
 }
-function Modal(){
-  return(
-    <div className='flex-box'>
-      <div className='modal-con'>
-        <h3>제목</h3>
-        <p>날짜</p>
-        <p>상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내
-        용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용상세내용
-        상세내용상세내용상세내용상세내용상세내용상세내용</p>
+
+export default App;
+
+function Modal(props) {
+  return (
+    <div className="flex-box">
+      <div className="modal-con">
+        <div className="modal-title"><p>{props.content[props.i].title}</p></div>
+        <div className="modal-date"><p>{props.content[props.i].date}</p></div>
+        <p>{props.content[props.i].content}</p>
+        <button onClick={() => { props.setModal(false) }} className='btn'>닫기</button>
       </div>
     </div>
+
   )
+
 }
-export default App;
