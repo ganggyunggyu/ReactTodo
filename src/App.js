@@ -1,38 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
-
+import Modal from './components/Modal'
+import Content from './components/Content'
+import { Route, Routes, Link } from 'react-router-dom';
+import InputForm from './components/InputForm';
 
 function App() {
 
+
   let [modal, setModal] = useState(false)
   let [modalIndex, setModalIndex] = useState(0)
-  let [addInput, setAddInput] = useState('')
-
-
-  let [content, setContent] = useState([
-    {
-      title: '다!래끼',
-      date: '3월23일',
-      like: 0,
-      content: `Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-      Dolorem, quos atque ipsum distinctio 
-      harum,vitae modi deserunt unde laboriosam molestias totam optio accusantium aut voluptas corporis 
-      tempora vero blanditiis a.`,
-    },
-    {
-      title: '가!래끼',
-      date: '3월26일',
-      like: 0,
-      content: '상세내용~',
-    },
-    {
-      title: '나!래끼',
-      date: '3월21일',
-      like: 0,
-      content: '상세적내용~~나레낍부분',
-    }
-  ])
+  let [titleInput, setTitleInput] = useState('')
+  let [contentInput, setContentInput] = useState('')
+  let [content, setContent] = useState([])
+  let date = new Date()
+  let now = date.toLocaleString()
 
   const modalOn = () => {
     setModal(true)
@@ -42,24 +25,32 @@ function App() {
     copyContent[i].like = copyContent[i].like + 1
     setContent(copyContent)
   }
-
   const likeDown = (i) => {
     let copyContent = [...content]
     copyContent[i].like = copyContent[i].like - 1
     setContent(copyContent)
   }
-  const addInputValue = (e) => {
-    setAddInput(e.target.value)
+  const addTitleValue = (e) => {
+    setTitleInput(e.target.value)
+  }
+  const addContentValue = (e) => {
+    setContentInput(e.target.value)
   }
   const addInputBtn = () => {
     let newContent = {
-      title: addInput,
-      date: '날짜가져와',
+      title: titleInput,
+      date: now,
       like: 0,
+      content: contentInput,
     }
     let copyContent = [...content]
     copyContent.unshift(newContent)
     setContent(copyContent)
+
+  }
+  const clearValue = () => {
+    setContentInput('')
+    setTitleInput('')
   }
   const contentDelete = (i) => {
     let copyContent = [...content]
@@ -70,27 +61,51 @@ function App() {
 
   return (
     <div className="app">
-      <div className="black-nav">
-        <h1>리엑트 게시판 GOOD</h1>
+      <div className="nav">
+        <h1>만능 투두 개시판</h1>
       </div>
-      {
-        content.map((contentEl, i) => {
-          return (
-            <div className="content-box" key={i}>
-              <h4 className='cursor' onClick={() => { modalOn(); setModalIndex(i) }}>{contentEl.title}</h4>
-              <p className=''>{contentEl.date}</p>
-              <span className=''>{contentEl.like}</span>
-              <button onClick={() => { likeUp(i) }} className='btn'>GOOD</button>
-              <button onClick={() => { likeDown(i) }} className='btn'>BAD</button>
-              <button onClick={() => { contentDelete(i) }} className='btn right-btn'>삭제</button>
+      <Routes>
+        <Route path='/' element={
+          <>
+            {
+              content.map((contentEl, i) => {
+                return (
+                  <>
+                    <Content
+                      i={i}
+                      contentEl={contentEl}
+                      modalOn={modalOn}
+                      setModalIndex={setModalIndex}
+                      likeUp={likeUp}
+                      likeDown={likeDown}
+                      contentDelete={contentDelete}
+                    >
+                    </Content>
+                  </>
+                )
+              })
+            }
+            <div className='flex-box'>
+              <Link to={'/add'} className='add-btn btn'>글 추가</Link>
             </div>
-          )
-        })
-      }
-      <div className="add-input-box flex-box">
-        <input className='title-input' type="text" onChange={(e) => { addInputValue(e) }} />
-        <input className='btn' type="button" value="글 추가" onClick={() => { addInputBtn() }} />
-      </div>
+          </>}>
+        </Route>
+        <Route path='/add' element={
+          <>
+            <h1>안녕나추가페이지</h1>
+            <InputForm
+              titleInput={titleInput}
+              addTitleValue={addTitleValue}
+              contentInput={contentInput}
+              addContentValue={addContentValue}
+              addInputBtn={addInputBtn}
+              clearValue={clearValue}
+            >
+            </InputForm>
+          </>
+        }>
+        </Route>
+      </Routes>
       {
         modal == true ? <Modal
           content={content}
@@ -107,18 +122,3 @@ function App() {
 }
 
 export default App;
-
-function Modal(props) {
-  return (
-    <div className="flex-box">
-      <div className="modal-con">
-        <div className="modal-title"><p>{props.content[props.i].title}</p></div>
-        <div className="modal-date"><p>{props.content[props.i].date}</p></div>
-        <p>{props.content[props.i].content}</p>
-        <button onClick={() => { props.setModal(false) }} className='btn'>닫기</button>
-      </div>
-    </div>
-
-  )
-
-}
