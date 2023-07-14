@@ -1,5 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Dongle:wght@300&display=swap');
+
 body{
   background: #FAF0E4;
+}
+.dongle-font{
+  font-family: 'Dongle', sans-serif;
 }
 .App {
   text-align: center;
@@ -11,19 +16,17 @@ div{
 .nav{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   padding-left: 20px;
   background-color: #9BCDD2;
-  width: 100%;
+  width: 100vw;
   color: white;
   text-align: center;
-}
-.content-box{
-  display: flex;
-  text-align: left;
-  padding-left: 20px;
-  border-bottom: 1px solid #9BCDD2;
-  align-items: center;
   position: relative;
+}
+.nav-item{
+  text-decoration: none;
+  color: white;
 }
 span, h4{
   padding-right: 10px;
@@ -35,12 +38,21 @@ span, h4{
 .btn{
   cursor: pointer;
   margin: 10px;
-  padding: 10px;
+  padding: 5px;
   border: none;
   color: white;
   background: #9BCDD2;
   border-radius: 5px;
   text-decoration: none;
+  transition: 1s;
+  font-family: 'Dongle', sans-serif;
+  font-size: 20px;
+  width: 60px;
+  height: 40px;
+  
+}
+.btn:hover{
+  background-color: #3AA6B9;
 }
 
 .flex-box{
@@ -51,17 +63,16 @@ span, h4{
 .del-btn{
   background: #FF8551;
 }
-.input-style{
-  margin: 10px;
-  padding: 10px;
-  border: 1px solid #9BCDD2;
-  background: #FAF0E4;
-}
+
 .add-btn{
   background: #FFDEDE;
   color: black;
 }
 .btn-container{
+  position : absolute;
+  right: 30px;
+}
+.nav-btn-container{
   position : absolute;
   right: 30px;
 }

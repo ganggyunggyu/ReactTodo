@@ -3,7 +3,7 @@ import './Modal.css'
 function Modal(props) {
     return (
       <div className="flex-box">
-        <div className="modal-con">
+        <div className="modal-con dongle-font">
           <div className="modal-title"><p>{props.content[props.i].title}</p></div>
           <div className="modal-date"><p>{props.content[props.i].date}</p></div>
           <p>{props.content[props.i].content}</p>

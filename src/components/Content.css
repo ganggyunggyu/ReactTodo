@@ -1,0 +1,42 @@
+.content-box {
+  display: flex;
+  text-align: left;
+  padding-left: 20px;
+  border-bottom: 1px solid #9BCDD2;
+  align-items: center;
+  position: relative;
+  font-size: 1.5rem;
+  height: 130px;
+
+}
+
+.check-btn {
+  cursor: pointer;
+  margin-left: 20px;
+  margin-right: 20px;
+  padding: 10px;
+  border: #9BCDD2 solid 1px;
+  color: white;
+  background-color: #FAF0E4;
+  border-radius: 5px;
+  color: black;
+}
+
+@media (max-width : 680px) {
+  .content-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+
+
+  }
+
+  .btn-container {
+    bottom: 0;
+    left: 20px;
+    width: 100vw;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+}

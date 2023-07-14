@@ -1,14 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import './InputForm.css';
 
-export default function InputForm({titleInput, addTitleValue, contentInput, addContentValue, addInputBtn, clearValue }) {
+export default function InputForm({ titleInput, addTitleValue, contentInput, addContentValue, addInputBtn, clearValue }) {
     return (
-        <div>
-            <form className="add-input-box flex-box">
-                <input className='input-style title-input' type="text" value={titleInput} onChange={(e) => { addTitleValue(e) }} />
-                <input className='input-style content-input' type="text" value={contentInput} onChange={(e) => { addContentValue(e) }} />
+        <>
+            <h1 className='add-title dongle-font'>안녕나추가페이지</h1>
+            <form className="add-input-box input-box">
+                <input className='input-style title-input dongle-font' type="text" value={titleInput} onChange={(e) => { addTitleValue(e) }} placeholder='TITLE' />
+                <input className='input-style content-input dongle-font' type="text" value={contentInput} onChange={(e) => { addContentValue(e) }} placeholder='OTHER...' />
                 <input className='add-btn btn' type="button" value="등록" onClick={() => { addInputBtn(); clearValue() }} />
             </form>
-        </div>
+        </>
     )
 }

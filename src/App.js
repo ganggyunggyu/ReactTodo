@@ -5,6 +5,8 @@ import Modal from './components/Modal'
 import Content from './components/Content'
 import { Route, Routes, Link } from 'react-router-dom';
 import InputForm from './components/InputForm';
+import styled from 'styled-components'
+
 
 function App() {
 
@@ -14,9 +16,10 @@ function App() {
   let [titleInput, setTitleInput] = useState('')
   let [contentInput, setContentInput] = useState('')
   let [content, setContent] = useState([])
+
   let date = new Date()
   let now = date.toLocaleString()
-
+  
   const modalOn = () => {
     setModal(true)
   }
@@ -42,6 +45,7 @@ function App() {
       date: now,
       like: 0,
       content: contentInput,
+      check: false,
     }
     let copyContent = [...content]
     copyContent.unshift(newContent)
@@ -57,12 +61,33 @@ function App() {
     copyContent.splice(i, 1)
     setContent(copyContent)
   }
+  const allDeleteBtn = () => {
+    let copyContent = [...content]
+    setContent([])
+    console.log(copyContent)
+  }
+  const checkClear = (i) => {
+    let copyContent = [...content]
+    if(copyContent[i]['check'] === false){
+      copyContent[i]['check'] = true
+    }else{
+      copyContent[i]['check'] = false
+    }
+    setContent(copyContent)
+    console.log(copyContent[i]['check'])
+    console.log(content[i]['check'])
+  }
+
 
 
   return (
     <div className="app">
-      <div className="nav">
-        <h1>만능 투두 개시판</h1>
+      <div className="nav dongle-font">
+        <Link className='nav-item' to={'/'}><h1>만능 투두 개시판</h1></Link>        
+        <div className='nav-btn-container'>
+          <button onClick={()=>{ allDeleteBtn() }} className="btn del-btn">전체삭제</button>
+        </div>
+
       </div>
       <Routes>
         <Route path='/' element={
@@ -79,6 +104,7 @@ function App() {
                       likeUp={likeUp}
                       likeDown={likeDown}
                       contentDelete={contentDelete}
+                      checkClear={checkClear}
                     >
                     </Content>
                   </>
@@ -86,13 +112,12 @@ function App() {
               })
             }
             <div className='flex-box'>
-              <Link to={'/add'} className='add-btn btn'>글 추가</Link>
+              <Link to={'/add'} className='add-btn btn flex-box'>글 추가</Link>
             </div>
           </>}>
         </Route>
         <Route path='/add' element={
           <>
-            <h1>안녕나추가페이지</h1>
             <InputForm
               titleInput={titleInput}
               addTitleValue={addTitleValue}
